@@ -72,10 +72,12 @@
         dyrIndex.forEach((dyr) => {
           let templateClone = myTemplate.cloneNode(true).content;
 
-          templateClone.querySelector("h3").textContent = `${dyr.navn}`;
+          templateClone.querySelector("h3").textContent = `Navn: ${dyr.navn}`;
           templateClone.querySelector("img").src = `${dyr.billede}`;
-          templateClone.querySelector("p").textContent += `${dyr.type}`;
-          templateClone.querySelector("p + p").textContent += `${dyr.levested}`;
+          templateClone.querySelector("p").textContent = `Type: ${dyr.type}`;
+          templateClone.querySelector(
+            "p + p"
+          ).textContent = `Levested: ${dyr.levested}`;
           container.appendChild(templateClone);
         });
       });
