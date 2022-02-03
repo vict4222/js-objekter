@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        line-height: 1.5rem;
+      }
+
+      .liste {
+        border: 1px black solid;
+        margin: 16px;
+        padding: 8px;
+        width: max(12.5rem, 50vw);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="data-container"></section>
+    <template>
+      <article class="liste">
+        <h3></h3>
+        <img src="" alt="Billede" />
+        <p></p>
+        <p></p>
+      </article>
+    </template>
+    <script>
+      const file = "dyrIndex.json";
+
+      async function getData(file) {
+        const result = await fetch(file);
+        const json = await result.json();
+        show(json);
+      }
+
+      function show(json) {
+        const container = document.querySelector(".data-container");
+        const myTemplate = document.querySelector("template");
+        json.forEach((dyr) => {
+          let templateClone = myTemplate.cloneNode(true).content;
+
+          templateClone.querySelector("h3").textContent = `Navn: ${dyr.navn}`;
+          templateClone.querySelector("img").src = `${dyr.billede}`;
+          templateClone.querySelector("p").textContent = `Type: ${dyr.type}`;
+          templateClone.querySelector(
+            "p + p"
+          ).textContent = `Levested: ${dyr.levested}`;
+          container.appendChild(templateClone);
+        });
+      }
+
+      getData(file);
+    </script>
+  </body>
+</html>
