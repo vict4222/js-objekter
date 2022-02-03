@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        line-height: 1.5rem;
+      }
+
+      .liste {
+        border: 1px black solid;
+        margin: 16px;
+        padding: 8px;
+        width: max(12.5rem, 50vw);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="data-container"></section>
+    <template>
+      <article class="liste">
+        <h3></h3>
+        <img src="" alt="Billede" />
+        <p></p>
+        <p></p>
+      </article>
+    </template>
+    <script>
+      const gris = document.getElementById("gris");
+      let dyrIndex = [
+        {
+          navn: "frø",
+          type: "amfibie",
+          billede: "http://mabe-kea.dk/E19/pics/frog.png",
+          levested: "vandhullet",
+        },
+        {
+          navn: "gris",
+          type: "pattedyr",
+          billede: "http://mabe-kea.dk/E19/pics/pig.png",
+          levested: "grisefarmen",
+        },
+        {
+          navn: "ræv",
+          type: "pattedyr",
+          billede: "http://mabe-kea.dk/E19/pics/fox.png",
+          levested: "skoven",
+        },
+        {
+          navn: "sild",
+          type: "fisk",
+          billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+          levested: "havet",
+        },
+        {
+          navn: "krokodille",
+          type: "krybdyr",
+          billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+          levested: "floden",
+        },
+      ];
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector(".data-container");
+        const myTemplate = document.querySelector("template");
+        dyrIndex.forEach((dyr) => {
+          let templateClone = myTemplate.cloneNode(true).content;
+
+          templateClone.querySelector("h3").textContent = `${dyr.navn}`;
+          templateClone.querySelector("img").src = `${dyr.billede}`;
+          templateClone.querySelector("p").textContent += `${dyr.type}`;
+          templateClone.querySelector("p + p").textContent += `${dyr.levested}`;
+          container.appendChild(templateClone);
+        });
+      });
+    </script>
+  </body>
+</html>
